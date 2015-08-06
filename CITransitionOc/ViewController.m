@@ -7,8 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "TransitionImageView.h"
+#import "UIView+BlockGesture.h"
 
 @interface ViewController ()
+{
+    NSString *currentImageName;
+}
+@property (weak, nonatomic) IBOutlet TransitionImageView *transitionImageView;
 
 @end
 
@@ -17,6 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+
+    [_transitionImageView addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        currentImageName = ([currentImageName  isEqualToString:@"Photo2.jpg"]) ? @"Photo1.jpg" : @"Photo2.jpg";
+        [_transitionImageView transitionToImage:[UIImage imageNamed:currentImageName]];
+//        imageView.transitionToImage(UIImage(named: currentImageName)) 
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
